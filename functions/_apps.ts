@@ -997,6 +997,61 @@ Lightweight static server (nginx). No host GPU required — the game renders cli
       options: { resources: { cpu: "1", memory: "256Mi", disk: "1Gi" } },
     },
   },
+  {
+    metadata: {
+      name: "aicrm",
+      version: "0.1.1",
+      icon: "https://raw.githubusercontent.com/ska1walker/aicrm/main/icon.png",
+      title: { en: "aicrm" },
+      description: { en: "Sales CRM that runs entirely on your own box — companies, contacts, deals and an AI assistant that never phones home" },
+      fullDescription:
+        `**aicrm** is a lean sales CRM for teams that cannot send their pipeline to a US cloud.
+
+Companies, contacts, deals on a drag-and-drop pipeline board, an activity timeline on every record, tasks, quotes from a product catalogue, qualification scoring and a weighted forecast — the parts a sales team actually uses, without the rest.
+
+**AI where it saves work**
+- A typed call note becomes note, tasks, next step and qualification — proposed by the model, saved by a person
+- Daily briefing, questions answered from your own data with sources, quote proposals with prices from the catalogue, never from the model
+- New companies and contacts are enriched from the company website and, if you configure a search service, from search hits including LinkedIn pages — every value names its source, contact data must appear verbatim, existing values are never overwritten
+
+**Language model**
+aicrm ships with no endpoint configured. Point it at any OpenAI-compatible address under Settings — for example the LiteLLM app on the same box. There is deliberately no default: nothing is sent anywhere until you enter an address, and the app says so plainly.
+
+**Integrations**
+Signed webhooks in from Insilo (meeting minutes land on the deal) and from a mail relay; signed mail out. Backups every six hours to app data, restored automatically after a reinstall.
+
+No telemetry. No phone home. Fonts are served from the box.
+
+**Resource Usage**
+CPU: 0.2 cores requested, up to 2
+RAM: 1 GB requested, up to 2
+Disk: 1 GB (database share, backups)
+GPU: none — the language model is external`,
+      upgradeDescription:
+        `v0.1.1: first release. No Envoy timeout on the entrance (the model answers synchronously). Built for Olares 1.12.6.`,
+      categories: ["AI"],
+      developer: "kaivo.studio",
+      website: "https://aimighty.de",
+      sourceCode: "https://github.com/ska1walker/aicrm",
+      supportArch: ["amd64"],
+      requiredCpu: "0.2",
+      requiredMemory: "1Gi",
+      requiredDisk: "1Gi",
+      requiredGpu: "0",
+      limitedCpu: "2",
+      limitedMemory: "2Gi",
+      apiTimeout: 0,
+    },
+    spec: {
+      type: "app",
+      entrance: [
+        { name: "aicrm", title: { en: "aicrm" }, port: 3000, host: "aicrm", authLevel: "internal", openMethod: "window" },
+      ],
+      permission: [],
+      middleware: [],
+      options: { resources: { cpu: "0.2", memory: "1Gi", disk: "1Gi" } },
+    },
+  },
 ];
 
 // redeploy timestamp: 1784998158
