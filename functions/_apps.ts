@@ -582,7 +582,7 @@ One RTX 5090 (exclusive nvidia.com/gpu:1), 24-40 GiB RAM, ~17 GB model cache in 
   {
     metadata: {
       name: "wings",
-      version: "26.10.4",
+      version: "26.10.5",
       icon: "https://raw.githubusercontent.com/bayerhazard/wings-for-hermes/main/icon.png",
       title: { en: "Wings" },
       description: {
@@ -590,8 +590,8 @@ One RTX 5090 (exclusive nvidia.com/gpu:1), 24-40 GiB RAM, ~17 GB model cache in 
         de: "KI-Agent-Web-UI für Hermes — Chat, Sessions, Memory, Skills, Cron",
       },
       upgradeDescription: {
-        en: "v26.10.4: fixes the upgrade failure caused by a duplicated HERMES_WEBUI_STT_MODEL env entry (it was emitted from both env and olaresEnv, so the Deployment env patch failed on $setElementOrder); it now comes only from the editable setting. v26.10.3: STT/TTS moved from the retired LiteLLM proxy to the Olares Router (default-stt / default-tts); audio endpoints now editable in the app settings.",
-        de: "v26.10.4: behebt den Upgrade-Fehler durch einen doppelten HERMES_WEBUI_STT_MODEL-Eintrag (er kam aus env UND olaresEnv, wodurch der Deployment-Env-Patch an $setElementOrder scheiterte); jetzt kommt er nur noch aus der editierbaren Einstellung. v26.10.3: STT/TTS vom stillgelegten LiteLLM-Proxy auf den Olares Router umgestellt (default-stt / default-tts); Audio-Endpunkte jetzt in den App-Einstellungen änderbar.",
+        en: "v26.10.5: German interface throughout (formal address, no stray English), icons from the AImighty CI, fields, buttons, switches and cards in the AImighty design; auxiliary models now save right away; your own messages keep the time you sent them. v26.10.4: fixes the upgrade failure caused by a duplicated HERMES_WEBUI_STT_MODEL env entry (it was emitted from both env and olaresEnv, so the Deployment env patch failed on $setElementOrder); it now comes only from the editable setting. v26.10.3: STT/TTS moved from the retired LiteLLM proxy to the Olares Router (default-stt / default-tts); audio endpoints now editable in the app settings.",
+        de: "v26.10.5: Deutsche Oberfläche durchgehend (Sie-Form, keine englischen Reste), Zeichen aus dem AImighty-CI, Felder, Knöpfe, Schalter und Karten im AImighty-Design; Hilfsmodelle speichern sofort; eigene Nachrichten behalten die Uhrzeit, zu der sie gesendet wurden. v26.10.4: behebt den Upgrade-Fehler durch einen doppelten HERMES_WEBUI_STT_MODEL-Eintrag (er kam aus env UND olaresEnv, wodurch der Deployment-Env-Patch an $setElementOrder scheiterte); jetzt kommt er nur noch aus der editierbaren Einstellung. v26.10.3: STT/TTS vom stillgelegten LiteLLM-Proxy auf den Olares Router umgestellt (default-stt / default-tts); Audio-Endpunkte jetzt in den App-Einstellungen änderbar.",
       },
       fullDescription: {
         en: `**Wings** — AI Agent Web UI with premium redesign, curated skins, and auto-detection of Hermes Agent home.
