@@ -1910,7 +1910,7 @@ Keine GPU erforderlich.`,
   {
     metadata: {
       name: "aimrealtime",
-      version: "26.10.13",
+      version: "26.10.14",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimrealtime/main/icon.png",
       title: { en: "AIM Realtime Voice" },
       description: {
