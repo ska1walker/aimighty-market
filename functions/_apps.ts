@@ -833,7 +833,7 @@ Disk: model caches in the shared appCommon HF cache`,
   {
     metadata: {
       name: "aimpyannote",
-      version: "26.10.6",
+      version: "26.10.7",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-pyannote/main/icon.png",
       title: { en: "AIM Pyannote Audio" },
       description: { en: "Pyannote community-1 diarization + Silero VAD + speaker embeddings via Olares Model Console — CPU-only, OpenAI-compatible audio analysis" },
@@ -859,7 +859,7 @@ curl -X POST http://<entrance>/v1/audio/diarization -F "file=@audio.wav"
 **Resource Usage**
 CPU: 0.5-8 cores (diarization is the heavy stage), RAM: 1-8 GB, no GPU. The pyannote repo is gated on HuggingFace — accept its conditions for the HuggingFace account connected in Olares Settings.`,
       upgradeDescription:
-        `v26.10.6: Diarization also returns nonexclusive_segments (same run) - Note's evidence_v2 policy needs both views. v26.10.5: Chart-rev annotation so wrapper (ConfigMap) changes roll the engine pod. v26.10.4: GPU hidden from the engine (CUDA_VISIBLE_DEVICES empty) - diar/VAD/embeddings run strictly on the CPU. v26.10.3: llm-init pinned to the engine's node (podAffinity; node-local wrapper handoff + HF cache). v26.10.2: Engine fork ships inside the chart (ConfigMap wrapper at /opt/aim) on the stock beclab image; CPU batches + --exclusive via ENGINE_ARGS. First release: Pyannote community-1 diarization + Silero VAD + speaker embeddings in one CPU-only app; engine fork audio-pyannote:multi-v1; MODEL_SOURCE lists the gated pipeline first and the embedding model second; ENGINE_ARGS pins CPU batches and --exclusive. Router categories default-diar, default-vad, default-speaker-embed. Built for Olares 1.12.7.`,
+                 `v26.10.7: The gated pyannote weights are seeded from a public CC-BY-4.0 mirror (31 MB GitHub release asset) by an init container, so a fresh install needs no Hugging Face token and no gate acceptance; Hugging Face stays the fallback. v26.10.6: Diarization also returns nonexclusive_segments (same run) - Note's evidence_v2 policy needs both views. v26.10.5: Chart-rev annotation so wrapper (ConfigMap) changes roll the engine pod. v26.10.4: GPU hidden from the engine (CUDA_VISIBLE_DEVICES empty) - diar/VAD/embeddings run strictly on the CPU. v26.10.3: llm-init pinned to the engine's node (podAffinity; node-local wrapper handoff + HF cache). v26.10.2: Engine fork ships inside the chart (ConfigMap wrapper at /opt/aim) on the stock beclab image; CPU batches + --exclusive via ENGINE_ARGS. First release: Pyannote community-1 diarization + Silero VAD + speaker embeddings in one CPU-only app; engine fork audio-pyannote:multi-v1; MODEL_SOURCE lists the gated pipeline first and the embedding model second; ENGINE_ARGS pins CPU batches and --exclusive. Router categories default-diar, default-vad, default-speaker-embed. Built for Olares 1.12.7.`,
       categories: ["Audio"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-pyannote",
