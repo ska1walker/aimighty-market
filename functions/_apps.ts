@@ -1907,6 +1907,91 @@ Keine GPU erforderlich.`,
       options: { resources: { cpu: "500m", memory: "1Gi", disk: "10Gi" } },
     },
   },
+  {
+    metadata: {
+      name: "aimrealtime",
+      version: "26.10.10",
+      icon: "https://git.aimighty.olares.de/aimighty/aimrealtime/raw/branch/main/icon.png",
+      title: { en: "AIM Realtime Voice" },
+      description: {
+        en: "Realtime voice endpoint for Open WebUI 0.12 calls and the Olares Router's audio-s2s model (default-audio-s2s) — orchestrates the AIM Qwen3 ASR, Qwen3.8 and OmniVoice apps over their OpenAI-compatible APIs, CPU only",
+        de: "Realtime-Voice-Endpunkt für Open-WebUI-0.12-Anrufe und das audio-s2s-Modell des Olares Router (default-audio-s2s) — orchestriert die AIM-Apps Qwen3 ASR, Qwen3.8 und OmniVoice über ihre OpenAI-kompatiblen APIs, nur CPU",
+      },
+      fullDescription: {
+        en: `**AIM Realtime Voice** gives Open WebUI 0.12 its Realtime call mode without a new speech model: it exposes the OpenAI Realtime WebSocket endpoint Open WebUI's voice bridge connects to and drives the AIM speech and chat apps you already have.
+
+**Model**
+None of its own. Speech recognition comes from AIM Qwen3 1.7B ASR (\`/v1/audio/transcriptions\`), the conversation from AIM Qwen3.8 27B (\`/v1/chat/completions\`, thinking disabled per request for latency) and the voice from AIM OmniVoice 0.6B TTS (\`/v1/audio/speech\`). All three run in their own applications.
+
+**Inference Engine**
+A small Python service (FastAPI, streaming energy VAD on CPU) that speaks the realtime event set Open WebUI's bridge uses: session handshake, server-side VAD, live transcription events, response lifecycle, barge-in, and the \`generate_chat_completion\` function call Open WebUI uses to hand substantive questions to the chat's selected model. Runs on the master node, no GPU.
+
+**Key Features**
+- Open WebUI 0.12 Realtime call mode: *Admin → Settings → Audio → Voice calls*, base URL \`https://<appid>.aimighty.olares.de/v1\`
+- Reuses the installed AIM ASR / LLM / TTS apps; additional VRAM: zero
+- Function-call handoff to the chat model; tool approvals stay in chat
+- Bearer-protected endpoint, configurable upstreams, voice and concurrency
+
+**API**
+\`\`\`bash
+curl https://<appid>.aimighty.olares.de/healthz
+# WebSocket (Open WebUI's bridge):
+wss://<appid>.aimighty.olares.de/v1/realtime?model=aimrealtime
+\`\`\`
+
+**Resource Usage**
+CPU: 0.25-2 cores, RAM: 0.5-2 GiB, Disk: ~300 MB image. No GPU.`,
+        de: `**AIM Realtime Voice** gibt Open WebUI 0.12 seinen Realtime-Anrufmodus ohne ein neues Sprachmodell: Die App stellt den OpenAI-Realtime-WebSocket-Endpunkt bereit, mit dem sich Open WebUIs Voice-Bridge verbindet, und steuert die bereits installierten AIM-Sprach- und Chat-Apps.
+
+**Modell**
+Kein eigenes. Spracherkennung kommt von AIM Qwen3 1.7B ASR (\`/v1/audio/transcriptions\`), die Konversation von AIM Qwen3.8 27B (\`/v1/chat/completions\`, Thinking pro Anfrage deaktiviert) und die Stimme von AIM OmniVoice 0.6B TTS (\`/v1/audio/speech\`). Alle drei laufen in ihren eigenen Anwendungen.
+
+**Inferenz-Engine**
+Ein kleiner Python-Dienst (FastAPI, Streaming-Energie-VAD auf CPU), der das Realtime-Event-Set von Open WebUIs Bridge spricht: Session-Handshake, serverseitiges VAD, Live-Transkriptions-Events, Response-Lifecycle, Barge-in und den \`generate_chat_completion\`-Funktionsaufruf, mit dem Open WebUI inhaltliche Fragen an das gewählte Chat-Modell übergibt. Läuft auf dem Master-Node, ohne GPU.
+
+**Kernfunktionen**
+- Open-WebUI-0.12-Realtime-Anrufe: *Admin → Settings → Audio → Voice calls*, Basis-URL \`https://<appid>.aimighty.olares.de/v1\`
+- Nutzt die installierten AIM-ASR-/LLM-/TTS-Apps; zusätzlicher VRAM: null
+- Funktionsaufruf-Übergabe an das Chat-Modell; Tool-Freigaben bleiben im Chat
+- Bearer-geschützter Endpunkt, konfigurierbare Upstreams, Stimme und Parallelität
+
+**API**
+\`\`\`bash
+curl https://<appid>.aimighty.olares.de/healthz
+# WebSocket (Open WebUIs Bridge):
+wss://<appid>.aimighty.olares.de/v1/realtime?model=aimrealtime
+\`\`\`
+
+**Ressourcenverbrauch**
+CPU: 0,25-2 Kerne, RAM: 0,5-2 GiB, Disk: ~300 MB Image. Keine GPU.`,
+      },
+      upgradeDescription: {
+        en: "v26.10.10: Olares Router integration — the app is a shared model application now, its Model Console (llm-init + nginx front) advertises supports_audio_s2s, so Router fills default-audio-s2s and its model lifecycle (status/spec via --app) works; /v1/realtime is proxied past the HTTP-only console. v26.10.6: Stable voice-LLM configuration on the Qwen3.8 vLLM stack (thinking on, greedy, prefix nonce) — fixes repetition loops with tool calls. v26.10.5: Image rebuilt so the reported version matches the chart. v26.10.3: Deterministic tool decisions (greedy chat sampling, cleaned tool schema, repair for text-encoded tool calls) and a stricter voice prompt. v26.10.2: Full provider — streaming VAD, live transcription via AIM Qwen3 ASR, thinking-free chat with generate_chat_completion handoff, sentence-streamed OmniVoice speech, barge-in. v26.10.1: Initial Release for AImighty. Built for Olares 1.12.7.",
+        de: "v26.10.3: Deterministische Tool-Entscheidungen (Greedy-Sampling, bereinigtes Tool-Schema, Reparatur textkodierter Tool-Calls) und ein strengerer Voice-Prompt. v26.10.2: Voller Provider — Streaming-VAD, Live-Transkription über AIM Qwen3 ASR, Chat ohne Thinking mit generate_chat_completion-Übergabe, satzweise gestreamte OmniVoice-Sprache, Barge-in. v26.10.1: Initial Release für AImighty. Gebaut für Olares 1.12.7.",
+      },
+      categories: ["Audio", "Applications"],
+      developer: "Aimighty",
+      website: "https://github.com/bayerhazard/aimrealtime",
+      sourceCode: "https://github.com/bayerhazard/aimrealtime",
+      supportArch: ["amd64"],
+      requiredCpu: "250m",
+      limitedCpu: "2",
+      requiredMemory: "512Mi",
+      limitedMemory: "2Gi",
+      requiredDisk: "100Mi",
+      requiredGpu: "0",
+      apiTimeout: 0,
+    },
+    spec: {
+      type: "app",
+      entrance: [
+        { name: "aimrealtime", title: { en: "AIM Realtime Voice" }, port: 8080, host: "aimrealtime", authLevel: "internal", openMethod: "window", invisible: true },
+      ],
+      permission: [],
+      middleware: [],
+      options: { resources: { cpu: "250m", memory: "512Mi", disk: "100Mi" } },
+    },
+  },
 ];
 
 // redeploy timestamp: 1784998158
