@@ -312,7 +312,7 @@ export const SCHEMA_VERSION = "v2";
 // across apps (e.g. relay 26.9.183 vs aimqwen38llama 26.9.21), so a
 // version-scaled value can sit *below* the global high-water mark and the app
 // would be skipped by the incremental sync.
-const CANONICAL_EPOCH_MS = 4668000000000; // bump (strictly above the current water mark) on every deploy
+const CANONICAL_EPOCH_MS = 4671000000010; // bump (strictly above the current water mark) on every deploy
 function appModifyTime(name: string, version: string): number {
   // Every app carries the SAME deploy epoch: the syncer's high-water mark is
   // global (max_last_modify_time), so any per-app jitter could push one app
