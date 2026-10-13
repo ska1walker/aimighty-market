@@ -1084,7 +1084,7 @@ v26.10.1: Initial Release für AImighty`,
   {
     metadata: {
       name: "insilo",
-      version: "0.1.108",
+      version: "0.1.109",
       icon: "https://raw.githubusercontent.com/ska1walker/insilo/main/icon.png",
       title: { en: "Insilo" },
       description: {
@@ -1152,7 +1152,15 @@ Speicher: 30 GB (Ton, Whisper- und BGE-M3-Modelle ~3 GB, Datenbankanteil)
 GPU: keine — Whisper läuft auf der CPU, das Sprachmodell ist extern`,
       },
       upgradeDescription: {
-        en: `v0.1.108: Recordings arrive on boxes with two nodes.
+        en: `v0.1.109: Renamed speakers stay saved.
+
+**Renaming and assigning speakers reported success but saved nothing** — the next time the meeting opened, the old name was back. Insilo now saves the change, and if saving ever fails, it reports an error instead of success.
+
+**With a speaker from your catalogue in the transcript, the other speakers could no longer be renamed.** That works again.
+
+**In the navigation, the selected page now has a background** instead of a gold edge, as in the AImighty design system.
+
+v0.1.108: Recordings arrive on boxes with two nodes.
 
 **On a box with two nodes, processing sometimes saw a freshly uploaded recording as empty** and wrongly reported an error of the speech recognition (HTTP 500). Insilo now checks the file size before reading. If nothing arrives anyway, the message says that the storage is the cause, and the recording is kept.
 
@@ -1223,7 +1231,15 @@ v0.1.101: long meetings get through.
 **Short recordings get their speaker names back.** With only a few segments, speaker separation failed silently and the transcript came back with no attribution.
 
 **Still true since 0.1.93:** where the shared app folder is available, Insilo writes every meeting summary there, with no switch. Every app with access to that folder can read them. They do not leave the box, but they do leave Insilo. The transcript stays in Insilo.`,
-        de: `v0.1.108: Aufnahmen kommen auf Boxen mit zwei Rechnern an.
+        de: `v0.1.109: Umbenannte Sprecher bleiben gespeichert.
+
+**Sprecher umbenennen und zuordnen meldete Erfolg, speicherte aber nichts** — beim nächsten Öffnen stand der alte Name da. Jetzt speichert Insilo die Änderung, und gelingt das einmal nicht, meldet es einen Fehler statt Erfolg.
+
+**Stand ein Sprecher aus Ihrem Katalog im Transkript, ließen sich die übrigen nicht mehr umbenennen.** Das geht wieder.
+
+**In der Navigation ist die gewählte Seite jetzt hinterlegt** statt mit einer goldenen Kante markiert, wie im AImighty-Designsystem.
+
+v0.1.108: Aufnahmen kommen auf Boxen mit zwei Rechnern an.
 
 **Auf einer Box mit zwei Rechnern sah die Verarbeitung eine gerade hochgeladene Aufnahme manchmal leer** und meldete fälschlich einen Fehler der Spracherkennung (HTTP 500). Insilo gleicht die Größe der Datei jetzt vor dem Lesen ab. Kommt trotzdem nichts an, sagt die Meldung, dass es am Speicher liegt, und die Aufnahme bleibt erhalten.
 
